@@ -8,8 +8,8 @@ async function runTests() {
   const resQ = await fetch(`${BASE}/api/questions`);
   if (!resQ.ok) throw new Error(`Failed /api/questions: ${resQ.status}`);
   const questions = await resQ.json();
-  console.log(`   ✓ Received ${questions.length} questions (expected 100).`);
-  if (questions.length !== 100) throw new Error('Expected 100 questions');
+  console.log(`   ✓ Received ${questions.length} questions (expected 200).`);
+  if (questions.length !== 200) throw new Error('Expected 200 questions');
   if ('answer_key' in questions[0]) throw new Error('Security failure: answer_key found in public questions!');
   console.log('   ✓ Security check passed: no private answer fields in public questions.');
 
@@ -18,14 +18,20 @@ async function runTests() {
   const resMeta = await fetch(`${BASE}/api/meta`);
   if (!resMeta.ok) throw new Error(`Failed /api/meta: ${resMeta.status}`);
   const meta = await resMeta.json();
-  console.log(`   ✓ Received meta: ${meta.sections.length} sections, ${meta.mock_papers.length} mock papers.`);
+  console.log(`   ✓ Received meta: ${meta.sections.length} sections, ${meta.mock_papers.length} mock papers (expected 6).`);
+  if (meta.mock_papers.length !== 6) throw new Error('Expected 6 mock papers');
 
-  // Test 3: GET /api/solution/Q001
-  console.log('3. Testing GET /api/solution/Q001...');
-  const resSol = await fetch(`${BASE}/api/solution/Q001`);
-  if (!resSol.ok) throw new Error(`Failed /api/solution/Q001: ${resSol.status}`);
-  const sol = await resSol.json();
-  console.log(`   ✓ Solution Q001 loaded: has answer_key (${sol.answer_key.length} chars) and reference_solution.`);
+  // Test 3: GET /api/solution/Q001 and Q101
+  console.log('3. Testing GET /api/solution/Q001 & Q101...');
+  const resSol1 = await fetch(`${BASE}/api/solution/Q001`);
+  if (!resSol1.ok) throw new Error(`Failed /api/solution/Q001: ${resSol1.status}`);
+  const sol1 = await resSol1.json();
+  console.log(`   ✓ Solution Q001 loaded: has answer_key (${sol1.answer_key.length} chars)`);
+
+  const resSol2 = await fetch(`${BASE}/api/solution/Q101`);
+  if (!resSol2.ok) throw new Error(`Failed /api/solution/Q101: ${resSol2.status}`);
+  const sol2 = await resSol2.json();
+  console.log(`   ✓ Solution Q101 loaded: has answer_key (${sol2.answer_key.length} chars)`);
 
   // Test 4: POST /api/grade (Live AI evaluation using Groq Key Pool)
   console.log('4. Testing POST /api/grade with live Groq AI evaluation...');

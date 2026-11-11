@@ -16,17 +16,17 @@ if (!fs.existsSync(dataDir)) {
 console.log('Reading QUESTION_BANK.md...');
 const content = fs.readFileSync(questionBankPath, 'utf-8');
 
-// Expected section distribution
+// Expected section distribution for 200 questions (2 batches of 100)
 const EXPECTED_SECTIONS = {
-  A: 20,
-  B: 15,
-  C: 12,
-  D: 13,
-  E: 12,
-  F: 8,
-  G: 5,
-  H: 10,
-  I: 5
+  A: 40,
+  B: 30,
+  C: 24,
+  D: 26,
+  E: 24,
+  F: 16,
+  G: 10,
+  H: 20,
+  I: 10
 };
 
 // Section headers and scope descriptions
@@ -41,176 +41,133 @@ while ((secMatch = sectionRegex.exec(content)) !== null) {
   });
 }
 
-// Split by question blocks
-const qBlocks = content.split(/^### (Q\d{3})/m);
-if (qBlocks.length < 2) {
-  console.error('CRITICAL: No questions found matching ### Q###');
-  process.exit(1);
+function parseQuestionsFromBank(content) {
+  const qBlocks = content.split(/^### (Q\d{3})/m);
+  if (qBlocks.length < 2) {
+    throw new Error('CRITICAL: No questions found matching ### Q###');
+  }
+
+  const list = [];
+
+  for (let i = 1; i < qBlocks.length; i += 2) {
+    const id = qBlocks[i].trim();
+    const rawBody = qBlocks[i + 1];
+
+    // Stop if we hit ## Manifest or other trailing section headers
+    const body = rawBody.split(/^## (?:Section|Manifest|Mock|Study)/m)[0];
+
+    const lines = body.split(/\r?\n/);
+    const meta = {};
+    let bodyStartIndex = 0;
+
+    for (let idx = 0; idx < lines.length; idx++) {
+      const line = lines[idx].trim();
+      if (line.startsWith('**') || line.startsWith('```')) {
+        bodyStartIndex = idx;
+        break;
+      }
+      const m = line.match(/^-\s*([a-zA-Z0-9_]+)\s*:\s*(.*)$/);
+      if (m) {
+        meta[m[1].trim()] = m[2].trim();
+      }
+    }
+
+    const remainingBody = lines.slice(bodyStartIndex).join('\n');
+    const type = meta.type || '';
+
+    let task = '';
+    let code = '';
+    let answerKey = '';
+    let referenceSolution = '';
+    let rubric = '';
+    let commonMistakes = '';
+
+    // Extract code
+    const codeMatch = remainingBody.match(/\*\*Code:\*\*[\s\S]*?```(?:java)?\r?\n([\s\S]*?)```/i);
+    if (codeMatch) {
+      code = codeMatch[1].trim();
+    } else {
+      // For questions where code is placed inside Task (e.g. Bank 1 predict-output)
+      const codeInTask = remainingBody.match(/```(?:java)?\r?\n([\s\S]*?)```/);
+      if (codeInTask && remainingBody.indexOf('**Answer key:**') > remainingBody.indexOf('```')) {
+        code = codeInTask[1].trim();
+      }
+    }
+
+    // Extract task
+    const taskMatch = remainingBody.match(/\*\*Task:\*\*([\s\S]*?)(?=\*\*Code:\*\*|\*\*Answer key:\*\*)/i);
+    if (taskMatch) {
+      let t = taskMatch[1].trim();
+      t = t.replace(/```(?:java)?\r?\n[\s\S]*?```/g, '').trim();
+      task = t;
+    }
+
+    // Extract answerKey
+    const ansMatch = remainingBody.match(/\*\*Answer key:\*\*([\s\S]*?)(?=\*\*Reference solution:\*\*|\*\*Trace and Explanation:\*\*|\*\*Rubric:\*\*)/i);
+    if (ansMatch) answerKey = ansMatch[1].trim();
+
+    // Extract referenceSolution or trace
+    const refMatch = remainingBody.match(/(?:\*\*Reference solution:\*\*|\*\*Trace and Explanation:\*\*)\s*([\s\S]*?)(?=\*\*Rubric:\*\*)/i);
+    if (refMatch) referenceSolution = refMatch[1].trim();
+
+    // Extract rubric
+    const rubMatch = remainingBody.match(/\*\*Rubric:\*\*([\s\S]*?)(?=\*\*Common (?:mistakes|pitfalls):\*\*|$)/i);
+    if (rubMatch) rubric = rubMatch[1].trim();
+
+    // Extract common mistakes
+    const misMatch = remainingBody.match(/\*\*Common (?:mistakes|pitfalls):\*\*([\s\S]*?)$/i);
+    if (misMatch) commonMistakes = misMatch[1].trim();
+
+    const qPublic = {
+      id,
+      section: meta.section,
+      type: meta.type,
+      difficulty: meta.difficulty,
+      topic: meta.topic,
+      points: parseInt(meta.points, 10) || 0,
+      time_minutes: parseInt(meta.time_minutes, 10) || 5,
+      source: meta.source || '',
+      error_header: meta.error_header || null,
+      task,
+      code
+    };
+
+    const qPrivate = {
+      answer_key: answerKey,
+      reference_solution: referenceSolution,
+      rubric,
+      common_mistakes: commonMistakes
+    };
+
+    list.push({ qPublic, qPrivate, rawBody });
+  }
+
+  return list;
 }
+
+const allQuestions = parseQuestionsFromBank(content);
+console.log(`Parsed ${allQuestions.length} questions from QUESTION_BANK.md.`);
 
 const publicQuestions = [];
 const privateAnswers = {};
 const parsedMap = new Map();
 
-for (let i = 1; i < qBlocks.length; i += 2) {
-  const id = qBlocks[i].trim();
-  const rawBody = qBlocks[i + 1];
-
-  // Stop if we hit ## Manifest or other trailing content in the last chunk
-  const body = rawBody.split(/^## /m)[0];
-
-  const lines = body.split(/\r?\n/);
-  const meta = {};
-  let bodyStartIndex = 0;
-
-  for (let idx = 0; idx < lines.length; idx++) {
-    const line = lines[idx].trim();
-    if (line.startsWith('**') || line.startsWith('```')) {
-      bodyStartIndex = idx;
-      break;
-    }
-    const m = line.match(/^-\s*([a-zA-Z0-9_]+)\s*:\s*(.*)$/);
-    if (m) {
-      const key = m[1].trim();
-      const val = m[2].trim();
-      meta[key] = val;
-    }
-  }
-
-  const remainingBody = lines.slice(bodyStartIndex).join('\n');
-
-  // Extract sections from remaining body
-  // Possible sections:
-  // **Task:**
-  // **Code:**
-  // **Answer key:**
-  // **Reference solution:**
-  // **Rubric:**
-  // **Common mistakes:** (or Common pitfalls:)
-  // **Trace and Explanation:** (predict output)
-
-  let task = '';
-  let code = '';
-  let answerKey = '';
-  let referenceSolution = '';
-  let rubric = '';
-  let commonMistakes = '';
-
-  const type = meta.type || '';
-
-  if (type === 'predict-output') {
-    // For predict-output, task typically contains the code snippet
-    // Structure:
-    // **Task:** ... ```java ... ```
-    // **Answer key:** ...
-    // **Trace and Explanation:** ...
-    // **Rubric:** ...
-    // **Common pitfalls:** ...
-    const taskMatch = remainingBody.match(/\*\*Task:\*\*([\s\S]*?)(?=\*\*Answer key:\*\*)/i);
-    const ansMatch = remainingBody.match(/\*\*Answer key:\*\*([\s\S]*?)(?=\*\*Trace and Explanation:\*\*)/i);
-    const traceMatch = remainingBody.match(/\*\*Trace and Explanation:\*\*([\s\S]*?)(?=\*\*Rubric:\*\*)/i);
-    const rubricMatch = remainingBody.match(/\*\*Rubric:\*\*([\s\S]*?)(?=\*\*Common (?:mistakes|pitfalls):\*\*|$)/i);
-    const mistakesMatch = remainingBody.match(/\*\*Common (?:mistakes|pitfalls):\*\*([\s\S]*?)$/i);
-
-    let rawTask = taskMatch ? taskMatch[1].trim() : '';
-    // Extract code block from task if present
-    const codeInTask = rawTask.match(/```(?:java)?\r?\n([\s\S]*?)```/);
-    if (codeInTask) {
-      code = codeInTask[1].trim();
-      task = rawTask.replace(/```(?:java)?\r?\n[\s\S]*?```/, '').trim();
-    } else {
-      task = rawTask;
-    }
-
-    answerKey = ansMatch ? ansMatch[1].trim() : '';
-    referenceSolution = traceMatch ? traceMatch[1].trim() : '';
-    rubric = rubricMatch ? rubricMatch[1].trim() : '';
-    commonMistakes = mistakesMatch ? mistakesMatch[1].trim() : '';
-  } else if (type === 'debug-extend') {
-    // **Task:** ...
-    // **Part 1: Debugging ...**
-    // **Code:** ...
-    // **Part 2: Extension ...**
-    // **Answer key:** ...
-    // **Reference solution:** ...
-    // **Rubric:** ...
-    // **Common mistakes:** ...
-    const taskMatch = remainingBody.match(/\*\*Task:\*\*([\s\S]*?)(?=\*\*Part 1:|\*\*Code:\*\*)/i);
-    const part1Match = remainingBody.match(/\*\*Part 1:[^*]*\*\*([\s\S]*?)(?=\*\*Code:\*\*)/i);
-    const codeMatch = remainingBody.match(/\*\*Code:\*\*[\s\S]*?```(?:java)?\r?\n([\s\S]*?)```/i);
-    const part2Match = remainingBody.match(/\*\*Part 2:[^*]*\*\*([\s\S]*?)(?=\*\*Answer key:\*\*)/i);
-    const ansMatch = remainingBody.match(/\*\*Answer key:\*\*([\s\S]*?)(?=\*\*Reference solution:\*\*)/i);
-    const refMatch = remainingBody.match(/\*\*Reference solution:\*\*([\s\S]*?)(?=\*\*Rubric:\*\*)/i);
-    const rubricMatch = remainingBody.match(/\*\*Rubric:\*\*([\s\S]*?)(?=\*\*Common (?:mistakes|pitfalls):\*\*|$)/i);
-    const mistakesMatch = remainingBody.match(/\*\*Common (?:mistakes|pitfalls):\*\*([\s\S]*?)$/i);
-
-    const taskParts = [];
-    if (taskMatch) taskParts.push(taskMatch[1].trim());
-    if (part1Match) taskParts.push('**Part 1: Debugging:** ' + part1Match[1].trim());
-    if (part2Match) taskParts.push('**Part 2: Extension:** ' + part2Match[1].trim());
-    task = taskParts.join('\n\n');
-
-    code = codeMatch ? codeMatch[1].trim() : '';
-    answerKey = ansMatch ? ansMatch[1].trim() : '';
-    referenceSolution = refMatch ? refMatch[1].trim() : '';
-    rubric = rubricMatch ? rubricMatch[1].trim() : '';
-    commonMistakes = mistakesMatch ? mistakesMatch[1].trim() : '';
-  } else {
-    // Standard spot-error or write-code
-    const taskMatch = remainingBody.match(/\*\*Task:\*\*([\s\S]*?)(?=\*\*Code:\*\*|\*\*Answer key:\*\*)/i);
-    const codeMatch = remainingBody.match(/\*\*Code:\*\*[\s\S]*?```(?:java)?\r?\n([\s\S]*?)```/i);
-    const ansMatch = remainingBody.match(/\*\*Answer key:\*\*([\s\S]*?)(?=\*\*Reference solution:\*\*)/i);
-    const refMatch = remainingBody.match(/\*\*Reference solution:\*\*([\s\S]*?)(?=\*\*Rubric:\*\*)/i);
-    const rubricMatch = remainingBody.match(/\*\*Rubric:\*\*([\s\S]*?)(?=\*\*Common (?:mistakes|pitfalls):\*\*|$)/i);
-    const mistakesMatch = remainingBody.match(/\*\*Common (?:mistakes|pitfalls):\*\*([\s\S]*?)$/i);
-
-    task = taskMatch ? taskMatch[1].trim() : '';
-    code = codeMatch ? codeMatch[1].trim() : '';
-    answerKey = ansMatch ? ansMatch[1].trim() : '';
-    referenceSolution = refMatch ? refMatch[1].trim() : '';
-    rubric = rubricMatch ? rubricMatch[1].trim() : '';
-    commonMistakes = mistakesMatch ? mistakesMatch[1].trim() : '';
-  }
-
-  // Clean reference solution of code fences if it's pure code or keep markdown
-  // Let's keep referenceSolution formatted or clean
-  const qPublic = {
-    id,
-    section: meta.section,
-    type: meta.type,
-    difficulty: meta.difficulty,
-    topic: meta.topic,
-    points: parseInt(meta.points, 10) || 0,
-    time_minutes: parseInt(meta.time_minutes, 10) || 5,
-    source: meta.source || '',
-    error_header: meta.error_header || null,
-    task,
-    code
-  };
-
-  const qPrivate = {
-    answer_key: answerKey,
-    reference_solution: referenceSolution,
-    rubric,
-    common_mistakes: commonMistakes
-  };
-
-  parsedMap.set(id, { qPublic, qPrivate });
+for (const item of allQuestions) {
+  const { qPublic, qPrivate } = item;
+  parsedMap.set(qPublic.id, item);
   publicQuestions.push(qPublic);
-  privateAnswers[id] = qPrivate;
+  privateAnswers[qPublic.id] = qPrivate;
 }
 
-console.log(`Parsed ${publicQuestions.length} questions from QUESTION_BANK.md.`);
-
 // 3.2 Strict Parsing Validation Rules
-// 1. Total questions != 100
-if (publicQuestions.length !== 100) {
-  console.error(`VALIDATION ERROR: Expected 100 questions, but found ${publicQuestions.length}`);
+// 1. Total questions != 200
+if (publicQuestions.length !== 200) {
+  console.error(`VALIDATION ERROR: Expected 200 questions, but found ${publicQuestions.length}`);
   process.exit(1);
 }
 
-// 2. Check IDs from Q001 through Q100
-for (let n = 1; n <= 100; n++) {
+// 2. Check IDs from Q001 through Q200
+for (let n = 1; n <= 200; n++) {
   const expectedId = 'Q' + String(n).padStart(3, '0');
   if (!parsedMap.has(expectedId)) {
     console.error(`VALIDATION ERROR: Missing question ID ${expectedId}`);
@@ -238,9 +195,13 @@ for (const q of publicQuestions) {
     console.error(`VALIDATION ERROR: Question ${q.id} (${q.type}) is missing required error_header`);
     process.exit(1);
   }
+  if (!q.task) {
+    console.error(`VALIDATION ERROR: Question ${q.id} has empty task!`);
+    process.exit(1);
+  }
 }
 
-// Parse Mock Papers from QUESTION_BANK.md
+// 6 Full Mock Papers (3 from Bank 1 + 3 from Bank 2)
 const mockPapers = [
   {
     id: 1,
@@ -313,10 +274,82 @@ const mockPapers = [
         questionIds: ['Q099']
       }
     ]
+  },
+  {
+    id: 4,
+    title: 'Mock Paper 4: Practical Synthesis & Verification (Leans Medium)',
+    targetMinutes: 71,
+    totalPoints: 37,
+    description: 'Batch 2 practical paper covering essential OOP encapsulation, swing clearance forms, and insertion sort.',
+    parts: [
+      {
+        part: 1,
+        title: 'Part 1: Encapsulation & Exceptions',
+        questionIds: ['Q105', 'Q106', 'Q110', 'Q124', 'Q138']
+      },
+      {
+        part: 2,
+        title: 'Part 2: Abstract Classes & GUI Controls',
+        questionIds: ['Q125', 'Q141', 'Q149', 'Q152']
+      },
+      {
+        part: 3,
+        title: 'Part 3: Algorithm Implementation',
+        questionIds: ['Q169']
+      }
+    ]
+  },
+  {
+    id: 5,
+    title: 'Mock Paper 5: Advanced Practical Examination (Leans Medium-Hard)',
+    targetMinutes: 76,
+    totalPoints: 41,
+    description: 'Batch 2 examination with multilevel inheritance, custom exceptions, and library registry systems.',
+    parts: [
+      {
+        part: 1,
+        title: 'Part 1: Class Hierarchies & Exceptions',
+        questionIds: ['Q103', 'Q107', 'Q113', 'Q127', 'Q143']
+      },
+      {
+        part: 2,
+        title: 'Part 2: Interfaces & Event Handling',
+        questionIds: ['Q128', 'Q145', 'Q150', 'Q156']
+      },
+      {
+        part: 3,
+        title: 'Part 3: Debug & Extend (Library Collection)',
+        questionIds: ['Q197']
+      }
+    ]
+  },
+  {
+    id: 6,
+    title: 'Mock Paper 6: Comprehensive Rigorous Mock (Leans Hard)',
+    targetMinutes: 106,
+    totalPoints: 53,
+    description: 'High-rigour capstone mock testing advanced polymorphic payments, GUI state tracking, and selection sort.',
+    parts: [
+      {
+        part: 1,
+        title: 'Part 1: Overriding & Complex Validations',
+        questionIds: ['Q117', 'Q114', 'Q119', 'Q131', 'Q144']
+      },
+      {
+        part: 2,
+        title: 'Part 2: Static/Final Interfaces & Admission GUIs',
+        questionIds: ['Q133', 'Q134', 'Q146', 'Q155']
+      },
+      {
+        part: 3,
+        title: 'Part 3: Selection Sort Implementation',
+        questionIds: ['Q171']
+      }
+    ]
   }
 ];
 
-// 5. Any referenced question ID in mock_papers does not exist in the bank
+// 5. Verify every referenced question ID in mock_papers exists in the bank
 for (const mock of mockPapers) {
   for (const part of mock.parts) {
     for (const qId of part.questionIds) {
@@ -328,7 +361,7 @@ for (const mock of mockPapers) {
   }
 }
 
-// Manifest items (100 rows)
+// Manifest items (200 rows)
 const manifest = publicQuestions.map(q => ({
   id: q.id,
   section: q.section,
@@ -355,104 +388,107 @@ const sections = sectionMeta.map(sec => {
 
 // Study Order details
 const studyOrder = {
-  title: '2-Day Calibrated Study Plan',
+  title: 'Comprehensive Calibrated Study Plan',
   day1: {
-    title: 'Day 1: Foundations & Core Mechanics (7 hours)',
+    title: 'Day 1: Foundations & Core Mechanics',
     blocks: [
       {
         block: 1,
-        time: '08:00 – 10:15 (2h 15m)',
-        section: 'A (Q001 – Q020)',
-        topic: 'Student Records — Constructors, inheritance, getters/setters, arrays, super(), overriding',
-        focus: 'Spotting missing return types, case-sensitive constructor spelling, semicolon omissions, loop bounds.'
+        time: '90 min',
+        section: 'A',
+        topic: 'Classes, Constructors, Encapsulation, Inheritance',
+        focus: 'Spot-error drills (Q001-Q020, Q101-Q120)'
       },
       {
         block: 2,
-        time: '10:30 – 12:15 (1h 45m)',
-        section: 'B (Q021 – Q035)',
-        topic: 'Payment Processing — Abstract classes vs interfaces, visibility reduction, polymorphic references',
-        focus: 'Enforcing abstract method signatures, public interface methods, surcharge/discount logic.'
+        time: '70 min',
+        section: 'B',
+        topic: 'Abstract Classes, Interfaces, Polymorphism, Modifiers',
+        focus: 'Modifiers and interface contracts (Q021-Q035, Q121-Q135)'
       },
       {
         block: 3,
-        time: '13:30 – 16:00 (2h 30m)',
-        section: 'E (Q061 – Q072)',
-        topic: 'Core Practical Programming — Arrays, 2D matrix multiplication, recursion, sorting & searching',
-        focus: 'Writing clean Java classes from scratch without IDE assistance. High priority: Q072 (Selection Sort).'
+        time: '90 min',
+        section: 'E',
+        topic: 'Arrays, Recursion, Sorting, Searching',
+        focus: 'Core algorithm coding (Q061-Q072, Q161-Q172)'
       },
       {
         block: 4,
-        time: '16:30 – 17:30 (1h 00m)',
-        section: 'H Part 1 (Q086 – Q090)',
-        topic: 'Mental Execution & Tracing — Constructor chaining order, static/instance init blocks, string pool, try-catch-finally',
-        focus: 'Stepping through code line-by-line before running the JVM.'
+        time: '30 min',
+        section: 'H',
+        topic: 'Trace the Output (Part 1)',
+        focus: 'String immutability, constructors & static blocks (Q086-Q090, Q186-Q190)'
       }
     ]
   },
   day2: {
-    title: 'Day 2: Advanced OOP, GUI Integration & Timed Mocks (8 hours)',
+    title: 'Day 2: Exam Style, Advanced GUI & Synthesis',
     blocks: [
       {
+        block: 1,
+        time: '60 min',
+        section: 'C',
+        topic: 'ArrayList & Exception Handling',
+        focus: 'Validation, custom exceptions & collections (Q036-Q047, Q136-Q147)'
+      },
+      {
+        block: 2,
+        time: '70 min',
+        section: 'D',
+        topic: 'Swing GUI & Events',
+        focus: 'Window builders, event wiring & validation (Q048-Q060, Q148-Q160)'
+      },
+      {
+        block: 3,
+        time: '50 min',
+        section: 'F',
+        topic: 'OOP Class Design',
+        focus: 'Polymorphic payroll, payments & hierarchies (Q073-Q080, Q173-Q180)'
+      },
+      {
+        block: 4,
+        time: '45 min',
+        section: 'G',
+        topic: 'ArrayList, Exceptions & Swing Programs',
+        focus: 'Full program integration (Q081-Q085, Q181-Q185)'
+      },
+      {
         block: 5,
-        time: '08:00 – 09:30 (1h 30m)',
-        section: 'C (Q036 – Q047) & D (Q048 – Q060)',
-        topic: 'University Members, Library & Banking GUI — ArrayList, exceptions, Swing components, ActionListener',
-        focus: 'Diagnosing missing container adds, unparsed numeric fields, misplaced catch blocks.'
+        time: '35 min',
+        section: 'I',
+        topic: 'Debug, then Extend',
+        focus: 'Fix bugs and implement extensions (Q096-Q100, Q196-Q200)'
       },
       {
         block: 6,
-        time: '09:45 – 11:30 (1h 45m)',
-        section: 'F (Q073 – Q080) & G (Q081 – Q085)',
-        topic: 'OOP Design & Swing Forms — Multi-level inheritance, abstract class hierarchies, custom exceptions, complete GUI windows',
-        focus: 'Implementing PaymentMethod (Q080) and interactive course registration forms (Q083, Q085).'
-      },
-      {
-        block: 7,
-        time: '11:30 – 12:30 (1h 00m)',
-        section: 'I (Q096 – Q100) & H Part 2 (Q091 – Q095)',
-        topic: 'Capstone Debug & Extend & Advanced Output Tracing',
-        focus: 'Two-part questions (error spotting + architectural extension) and tricky JVM corner cases.'
-      },
-      {
-        block: 8,
-        time: '13:45 – 17:15 (3h 30m)',
-        section: 'Full Mock Exam Simulation',
-        topic: 'Timed exam papers: Mock 1 (70m), Mock 2 (70m), Mock 3 (80m)',
-        focus: 'Simulate exact exam conditions followed by self-grading and feedback review.'
+        time: '25 min',
+        section: 'H',
+        topic: 'Trace the Output (Part 2)',
+        focus: 'Dynamic dispatch, try-finally & remove(int) (Q091-Q095, Q191-Q195)'
       }
     ]
-  },
-  lastHourReview: [
-    'Review case sensitivity in constructor names (e.g. public student(...) fails to compile).',
-    'Review abstract methods terminating with a body { ... } instead of a semicolon ;.',
-    'Review reducing visibility in overridden methods (e.g. protected overriding public).',
-    'Review integer division truncation: (1 / 2) * b * h is 0.0; use 0.5 * b * h.',
-    'Review String equality using == instead of .equals().',
-    'Review off-by-one loop conditions: i <= arr.length triggers ArrayIndexOutOfBoundsException.',
-    'Review container additions for Swing components: frame.add(btn), frame.add(new JScrollPane(textArea)).'
-  ],
-  emergency4Hour: [
-    { hour: 1, action: 'Solve Mock Paper 1 under strict 60-minute time conditions.' },
-    { hour: 2, action: 'Study Section A (Q001–Q010) and Section B (Q021–Q030) answer keys.' },
-    { hour: 3, action: 'Hand-write code for Q072 (SelectionSort) and Q080 (PaymentMethod Hierarchy).' },
-    { hour: 4, action: 'Walk through Section H (Q086–Q095) for output tracing corner cases.' }
-  ]
+  }
 };
 
 const metaData = {
+  version: '2.0.0',
+  totalQuestions: publicQuestions.length,
+  totalPoints: publicQuestions.reduce((s, q) => s + q.points, 0),
+  generatedAt: new Date().toISOString(),
   sections,
-  manifest,
+  mock_papers: mockPapers,
   study_order: studyOrder,
-  mock_papers: mockPapers
+  manifest
 };
 
-// Write outputs to data/
-fs.writeFileSync(path.join(dataDir, 'questions.public.json'), JSON.stringify(publicQuestions, null, 2));
-fs.writeFileSync(path.join(dataDir, 'answers.private.json'), JSON.stringify(privateAnswers, null, 2));
-fs.writeFileSync(path.join(dataDir, 'meta.json'), JSON.stringify(metaData, null, 2));
+// Write output JSON files
+fs.writeFileSync(path.join(dataDir, 'questions.public.json'), JSON.stringify(publicQuestions, null, 2), 'utf-8');
+fs.writeFileSync(path.join(dataDir, 'answers.private.json'), JSON.stringify(privateAnswers, null, 2), 'utf-8');
+fs.writeFileSync(path.join(dataDir, 'meta.json'), JSON.stringify(metaData, null, 2), 'utf-8');
 
 console.log('Successfully generated:');
-console.log(' - data/questions.public.json');
-console.log(' - data/answers.private.json');
-console.log(' - data/meta.json');
-console.log('Validation passed: 100 questions, sections distribution verified, mock references verified.');
+console.log(' - data/questions.public.json (' + publicQuestions.length + ' questions)');
+console.log(' - data/answers.private.json (' + Object.keys(privateAnswers).length + ' answers)');
+console.log(' - data/meta.json (' + sections.length + ' sections, ' + mockPapers.length + ' mock papers)');
+console.log('Validation passed: 200 questions, section distribution verified, all mock references verified.');

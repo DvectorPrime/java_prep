@@ -1,11 +1,15 @@
 {
+  "version": "2.0.0",
+  "totalQuestions": 200,
+  "totalPoints": 1158,
+  "generatedAt": "2026-11-11T12:31:06.713Z",
   "sections": [
     {
       "code": "A",
       "title": "Classes, Constructors, Encapsulation and Inheritance",
       "scope": "Class definitions, instance vs static fields, constructors (default, parameterized, copy), constructor chaining with this() and super(), encapsulation (private fields, public getters/setters), single/multilevel/hierarchical inheritance, and method overriding.",
-      "count": 20,
-      "totalPoints": 68,
+      "count": 40,
+      "totalPoints": 124,
       "questions": [
         "Q001",
         "Q002",
@@ -26,15 +30,35 @@
         "Q017",
         "Q018",
         "Q019",
-        "Q020"
+        "Q020",
+        "Q101",
+        "Q102",
+        "Q103",
+        "Q104",
+        "Q105",
+        "Q106",
+        "Q107",
+        "Q108",
+        "Q109",
+        "Q110",
+        "Q111",
+        "Q112",
+        "Q113",
+        "Q114",
+        "Q115",
+        "Q116",
+        "Q117",
+        "Q118",
+        "Q119",
+        "Q120"
       ]
     },
     {
       "code": "B",
       "title": "Abstract Classes, Interfaces, Polymorphism and Modifiers (final, static, abstract)",
       "scope": "Abstract classes and methods, interface definitions, implements keyword, multiple interface implementation, default and static interface methods (JDK 8), runtime polymorphism (dynamic method dispatch), and modifier rules (final classes/variables/methods, static methods and fields).",
-      "count": 15,
-      "totalPoints": 52,
+      "count": 30,
+      "totalPoints": 98,
       "questions": [
         "Q021",
         "Q022",
@@ -50,15 +74,30 @@
         "Q032",
         "Q033",
         "Q034",
-        "Q035"
+        "Q035",
+        "Q121",
+        "Q122",
+        "Q123",
+        "Q124",
+        "Q125",
+        "Q126",
+        "Q127",
+        "Q128",
+        "Q129",
+        "Q130",
+        "Q131",
+        "Q132",
+        "Q133",
+        "Q134",
+        "Q135"
       ]
     },
     {
       "code": "C",
       "title": "ArrayList and Exception Handling",
       "scope": "ArrayList operations (add, get, set, remove by index vs object, size, contains, isEmpty, generics), custom exceptions, checked vs unchecked exceptions, try-catch-finally control flow, multiple catch block hierarchy, and throw vs throws keywords.",
-      "count": 12,
-      "totalPoints": 43,
+      "count": 24,
+      "totalPoints": 83,
       "questions": [
         "Q036",
         "Q037",
@@ -71,15 +110,27 @@
         "Q044",
         "Q045",
         "Q046",
-        "Q047"
+        "Q047",
+        "Q136",
+        "Q137",
+        "Q138",
+        "Q139",
+        "Q140",
+        "Q141",
+        "Q142",
+        "Q143",
+        "Q144",
+        "Q145",
+        "Q146",
+        "Q147"
       ]
     },
     {
       "code": "D",
       "title": "Swing GUI and Event Handling",
       "scope": "Java Swing components (JFrame, JLabel, JTextField, JComboBox, JButton, JTextArea, JScrollPane, JOptionPane), Layout Managers (FlowLayout, BorderLayout, GridLayout), ActionListener interface and actionPerformed implementation, component registration with addActionListener, window lifecycle (setDefaultCloseOperation, pack, setVisible), input validation in GUI, and error dialogs.",
-      "count": 13,
-      "totalPoints": 46,
+      "count": 26,
+      "totalPoints": 99,
       "questions": [
         "Q048",
         "Q049",
@@ -93,15 +144,28 @@
         "Q057",
         "Q058",
         "Q059",
-        "Q060"
+        "Q060",
+        "Q148",
+        "Q149",
+        "Q150",
+        "Q151",
+        "Q152",
+        "Q153",
+        "Q154",
+        "Q155",
+        "Q156",
+        "Q157",
+        "Q158",
+        "Q159",
+        "Q160"
       ]
     },
     {
       "code": "E",
       "title": "Arrays, 2D Arrays, Methods, Overloading, Recursion, Sorting and Searching",
       "scope": "1D and 2D arrays, matrix operations, static and instance methods, method overloading, recursion (base cases, call stack unwinding), linear and binary search algorithms, and iterative sorting (bubble, insertion, selection sort).",
-      "count": 12,
-      "totalPoints": 119,
+      "count": 24,
+      "totalPoints": 247,
       "questions": [
         "Q061",
         "Q062",
@@ -114,15 +178,27 @@
         "Q069",
         "Q070",
         "Q071",
-        "Q072"
+        "Q072",
+        "Q161",
+        "Q162",
+        "Q163",
+        "Q164",
+        "Q165",
+        "Q166",
+        "Q167",
+        "Q168",
+        "Q169",
+        "Q170",
+        "Q171",
+        "Q172"
       ]
     },
     {
       "code": "F",
       "title": "OOP Class Design (Inheritance, Abstract Classes, Interfaces, Encapsulation)",
       "scope": "Complete object-oriented program design covering encapsulation, single/multilevel/hierarchical/multiple/hybrid inheritance, abstract classes with abstract and concrete methods, interfaces with default methods, and dynamic method dispatch.",
-      "count": 8,
-      "totalPoints": 84,
+      "count": 16,
+      "totalPoints": 174,
       "questions": [
         "Q073",
         "Q074",
@@ -131,29 +207,42 @@
         "Q077",
         "Q078",
         "Q079",
-        "Q080"
+        "Q080",
+        "Q173",
+        "Q174",
+        "Q175",
+        "Q176",
+        "Q177",
+        "Q178",
+        "Q179",
+        "Q180"
       ]
     },
     {
       "code": "G",
       "title": "Collections Framework, Custom Exceptions, and Advanced GUI Integration",
       "scope": "Comprehensive practical programming questions on the Java Collections Framework (ArrayList, generics, custom comparators), hierarchical custom exception handling with file logging, and event-driven Swing graphical user interfaces with input validation.",
-      "count": 5,
-      "totalPoints": 58,
+      "count": 10,
+      "totalPoints": 117,
       "questions": [
         "Q081",
         "Q082",
         "Q083",
         "Q084",
-        "Q085"
+        "Q085",
+        "Q181",
+        "Q182",
+        "Q183",
+        "Q184",
+        "Q185"
       ]
     },
     {
       "code": "H",
       "title": "Predict-the-Output Code Tracing",
       "scope": "Precise console output prediction for challenging Java code snippets testing initialization order, dynamic dispatch vs field hiding, compile-time overload resolution, String pool equality, try-catch-finally control flow, widening vs autoboxing, reference passing semantics, ArrayList removal variants, ragged arrays, and operator precedence.",
-      "count": 10,
-      "totalPoints": 60,
+      "count": 20,
+      "totalPoints": 91,
       "questions": [
         "Q086",
         "Q087",
@@ -164,24 +253,346 @@
         "Q092",
         "Q093",
         "Q094",
-        "Q095"
+        "Q095",
+        "Q186",
+        "Q187",
+        "Q188",
+        "Q189",
+        "Q190",
+        "Q191",
+        "Q192",
+        "Q193",
+        "Q194",
+        "Q195"
       ]
     },
     {
       "code": "I",
       "title": "Debug & Extend Real-World Exam Scenarios",
       "scope": "Multi-part capstone questions mirroring university exam debugging and programming problems. In Part 1, students analyze a buggy Java program, identifying exact line numbers, error types (syntax vs semantic), and specific fixes. In Part 2, students extend the corrected architecture with additional robust object-oriented capabilities, exception handling, and graphical user interface controls.",
-      "count": 5,
-      "totalPoints": 73,
+      "count": 10,
+      "totalPoints": 125,
       "questions": [
         "Q096",
         "Q097",
         "Q098",
         "Q099",
-        "Q100"
+        "Q100",
+        "Q196",
+        "Q197",
+        "Q198",
+        "Q199",
+        "Q200"
       ]
     }
   ],
+  "mock_papers": [
+    {
+      "id": 1,
+      "title": "Mock Paper 1: Standard Exam Parity (Leans Medium)",
+      "targetMinutes": 67,
+      "totalPoints": 43,
+      "description": "Replicates standard University of Ibadan COS 202 Java Practical Code Test structure.",
+      "parts": [
+        {
+          "part": 1,
+          "title": "Part 1: Student Records & Inheritance",
+          "questionIds": [
+            "Q001",
+            "Q003",
+            "Q006",
+            "Q011",
+            "Q036"
+          ]
+        },
+        {
+          "part": 2,
+          "title": "Part 2: Payment Processing & Windows",
+          "questionIds": [
+            "Q021",
+            "Q023",
+            "Q038",
+            "Q048"
+          ]
+        },
+        {
+          "part": 3,
+          "title": "Part 3: Writing a Program",
+          "questionIds": [
+            "Q072"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Mock Paper 2: Real Exam Parity (Leans Medium-Hard)",
+      "targetMinutes": 68,
+      "totalPoints": 43,
+      "description": "Challenging practical leaning medium-hard with complex payment processing and inheritance.",
+      "parts": [
+        {
+          "part": 1,
+          "title": "Part 1: Student Hierarchies & Library Catalog",
+          "questionIds": [
+            "Q002",
+            "Q007",
+            "Q012",
+            "Q026",
+            "Q041"
+          ]
+        },
+        {
+          "part": 2,
+          "title": "Part 2: Payment Surcharge & Event Handling",
+          "questionIds": [
+            "Q022",
+            "Q027",
+            "Q039",
+            "Q049"
+          ]
+        },
+        {
+          "part": 3,
+          "title": "Part 3: Writing a Program",
+          "questionIds": [
+            "Q080"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Mock Paper 3: High-Difficulty Mastery (Leans Hard)",
+      "targetMinutes": 84,
+      "totalPoints": 50,
+      "description": "Capstone mastery paper featuring advanced OOP, ATM GUI window, and debug & extend scenarios.",
+      "parts": [
+        {
+          "part": 1,
+          "title": "Part 1: Advanced OOP & Exception Handling",
+          "questionIds": [
+            "Q008",
+            "Q013",
+            "Q018",
+            "Q028",
+            "Q042"
+          ]
+        },
+        {
+          "part": 2,
+          "title": "Part 2: Polymorphic Surcharges & ATM GUI Window",
+          "questionIds": [
+            "Q031",
+            "Q032",
+            "Q045",
+            "Q060"
+          ]
+        },
+        {
+          "part": 3,
+          "title": "Part 3: Debug & Extend Capstone",
+          "questionIds": [
+            "Q099"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Mock Paper 4: Practical Synthesis & Verification (Leans Medium)",
+      "targetMinutes": 71,
+      "totalPoints": 37,
+      "description": "Batch 2 practical paper covering essential OOP encapsulation, swing clearance forms, and insertion sort.",
+      "parts": [
+        {
+          "part": 1,
+          "title": "Part 1: Encapsulation & Exceptions",
+          "questionIds": [
+            "Q105",
+            "Q106",
+            "Q110",
+            "Q124",
+            "Q138"
+          ]
+        },
+        {
+          "part": 2,
+          "title": "Part 2: Abstract Classes & GUI Controls",
+          "questionIds": [
+            "Q125",
+            "Q141",
+            "Q149",
+            "Q152"
+          ]
+        },
+        {
+          "part": 3,
+          "title": "Part 3: Algorithm Implementation",
+          "questionIds": [
+            "Q169"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Mock Paper 5: Advanced Practical Examination (Leans Medium-Hard)",
+      "targetMinutes": 76,
+      "totalPoints": 41,
+      "description": "Batch 2 examination with multilevel inheritance, custom exceptions, and library registry systems.",
+      "parts": [
+        {
+          "part": 1,
+          "title": "Part 1: Class Hierarchies & Exceptions",
+          "questionIds": [
+            "Q103",
+            "Q107",
+            "Q113",
+            "Q127",
+            "Q143"
+          ]
+        },
+        {
+          "part": 2,
+          "title": "Part 2: Interfaces & Event Handling",
+          "questionIds": [
+            "Q128",
+            "Q145",
+            "Q150",
+            "Q156"
+          ]
+        },
+        {
+          "part": 3,
+          "title": "Part 3: Debug & Extend (Library Collection)",
+          "questionIds": [
+            "Q197"
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Mock Paper 6: Comprehensive Rigorous Mock (Leans Hard)",
+      "targetMinutes": 106,
+      "totalPoints": 53,
+      "description": "High-rigour capstone mock testing advanced polymorphic payments, GUI state tracking, and selection sort.",
+      "parts": [
+        {
+          "part": 1,
+          "title": "Part 1: Overriding & Complex Validations",
+          "questionIds": [
+            "Q117",
+            "Q114",
+            "Q119",
+            "Q131",
+            "Q144"
+          ]
+        },
+        {
+          "part": 2,
+          "title": "Part 2: Static/Final Interfaces & Admission GUIs",
+          "questionIds": [
+            "Q133",
+            "Q134",
+            "Q146",
+            "Q155"
+          ]
+        },
+        {
+          "part": 3,
+          "title": "Part 3: Selection Sort Implementation",
+          "questionIds": [
+            "Q171"
+          ]
+        }
+      ]
+    }
+  ],
+  "study_order": {
+    "title": "Comprehensive Calibrated Study Plan",
+    "day1": {
+      "title": "Day 1: Foundations & Core Mechanics",
+      "blocks": [
+        {
+          "block": 1,
+          "time": "90 min",
+          "section": "A",
+          "topic": "Classes, Constructors, Encapsulation, Inheritance",
+          "focus": "Spot-error drills (Q001-Q020, Q101-Q120)"
+        },
+        {
+          "block": 2,
+          "time": "70 min",
+          "section": "B",
+          "topic": "Abstract Classes, Interfaces, Polymorphism, Modifiers",
+          "focus": "Modifiers and interface contracts (Q021-Q035, Q121-Q135)"
+        },
+        {
+          "block": 3,
+          "time": "90 min",
+          "section": "E",
+          "topic": "Arrays, Recursion, Sorting, Searching",
+          "focus": "Core algorithm coding (Q061-Q072, Q161-Q172)"
+        },
+        {
+          "block": 4,
+          "time": "30 min",
+          "section": "H",
+          "topic": "Trace the Output (Part 1)",
+          "focus": "String immutability, constructors & static blocks (Q086-Q090, Q186-Q190)"
+        }
+      ]
+    },
+    "day2": {
+      "title": "Day 2: Exam Style, Advanced GUI & Synthesis",
+      "blocks": [
+        {
+          "block": 1,
+          "time": "60 min",
+          "section": "C",
+          "topic": "ArrayList & Exception Handling",
+          "focus": "Validation, custom exceptions & collections (Q036-Q047, Q136-Q147)"
+        },
+        {
+          "block": 2,
+          "time": "70 min",
+          "section": "D",
+          "topic": "Swing GUI & Events",
+          "focus": "Window builders, event wiring & validation (Q048-Q060, Q148-Q160)"
+        },
+        {
+          "block": 3,
+          "time": "50 min",
+          "section": "F",
+          "topic": "OOP Class Design",
+          "focus": "Polymorphic payroll, payments & hierarchies (Q073-Q080, Q173-Q180)"
+        },
+        {
+          "block": 4,
+          "time": "45 min",
+          "section": "G",
+          "topic": "ArrayList, Exceptions & Swing Programs",
+          "focus": "Full program integration (Q081-Q085, Q181-Q185)"
+        },
+        {
+          "block": 5,
+          "time": "35 min",
+          "section": "I",
+          "topic": "Debug, then Extend",
+          "focus": "Fix bugs and implement extensions (Q096-Q100, Q196-Q200)"
+        },
+        {
+          "block": 6,
+          "time": "25 min",
+          "section": "H",
+          "topic": "Trace the Output (Part 2)",
+          "focus": "Dynamic dispatch, try-finally & remove(int) (Q091-Q095, Q191-Q195)"
+        }
+      ]
+    }
+  },
   "manifest": [
     {
       "id": "Q001",
@@ -364,6 +775,186 @@
       "source": "variant-of-tutorial"
     },
     {
+      "id": "Q101",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "easy",
+      "points": 1,
+      "topic": "constructors",
+      "source": "variant-of-tutorial"
+    },
+    {
+      "id": "Q102",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "easy",
+      "points": 1,
+      "topic": "static vs instance",
+      "source": "variant-of-tutorial"
+    },
+    {
+      "id": "Q103",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "easy",
+      "points": 2,
+      "topic": "methods",
+      "source": "original"
+    },
+    {
+      "id": "Q104",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "easy",
+      "points": 2,
+      "topic": "encapsulation",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q105",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "easy",
+      "points": 1,
+      "topic": "String comparison",
+      "source": "original"
+    },
+    {
+      "id": "Q106",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "constructors",
+      "source": "variant-of-test"
+    },
+    {
+      "id": "Q107",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 4,
+      "topic": "inheritance",
+      "source": "variant-of-test"
+    },
+    {
+      "id": "Q108",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "encapsulation",
+      "source": "variant-of-test"
+    },
+    {
+      "id": "Q109",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "multilevel inheritance",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q110",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "constructors and methods",
+      "source": "original"
+    },
+    {
+      "id": "Q111",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "inheritance and encapsulation",
+      "source": "variant-of-assignment"
+    },
+    {
+      "id": "Q112",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "static and this",
+      "source": "original"
+    },
+    {
+      "id": "Q113",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "overriding",
+      "source": "original"
+    },
+    {
+      "id": "Q114",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 4,
+      "topic": "ArrayList field and loops",
+      "source": "original"
+    },
+    {
+      "id": "Q115",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 3,
+      "topic": "constructor chaining",
+      "source": "original"
+    },
+    {
+      "id": "Q116",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 3,
+      "topic": "objects and encapsulation",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q117",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 3,
+      "topic": "overriding",
+      "source": "original"
+    },
+    {
+      "id": "Q118",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 3,
+      "topic": "validation in setters",
+      "source": "original"
+    },
+    {
+      "id": "Q119",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 4,
+      "topic": "inheritance and overriding",
+      "source": "original"
+    },
+    {
+      "id": "Q120",
+      "section": "A",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 4,
+      "topic": "logic in methods",
+      "source": "original"
+    },
+    {
       "id": "Q021",
       "section": "B",
       "type": "spot-error",
@@ -499,6 +1090,141 @@
       "source": "variant-of-slides"
     },
     {
+      "id": "Q121",
+      "section": "B",
+      "type": "spot-error",
+      "difficulty": "easy",
+      "points": 1,
+      "topic": "overriding and access",
+      "source": "variant-of-tutorial"
+    },
+    {
+      "id": "Q122",
+      "section": "B",
+      "type": "spot-error",
+      "difficulty": "easy",
+      "points": 1,
+      "topic": "interfaces",
+      "source": "variant-of-tutorial"
+    },
+    {
+      "id": "Q123",
+      "section": "B",
+      "type": "spot-error",
+      "difficulty": "easy",
+      "points": 1,
+      "topic": "default methods",
+      "source": "variant-of-tutorial"
+    },
+    {
+      "id": "Q124",
+      "section": "B",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "final and static",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q125",
+      "section": "B",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "abstract classes",
+      "source": "variant-of-test"
+    },
+    {
+      "id": "Q126",
+      "section": "B",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "abstract classes and interfaces",
+      "source": "variant-of-test"
+    },
+    {
+      "id": "Q127",
+      "section": "B",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "abstract classes",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q128",
+      "section": "B",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "interfaces",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q129",
+      "section": "B",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "default methods and upcasting",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q130",
+      "section": "B",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "final and static",
+      "source": "original"
+    },
+    {
+      "id": "Q131",
+      "section": "B",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 5,
+      "topic": "abstract classes and casting",
+      "source": "original"
+    },
+    {
+      "id": "Q132",
+      "section": "B",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 5,
+      "topic": "interfaces, abstract and final",
+      "source": "original"
+    },
+    {
+      "id": "Q133",
+      "section": "B",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 4,
+      "topic": "static and final",
+      "source": "original"
+    },
+    {
+      "id": "Q134",
+      "section": "B",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 4,
+      "topic": "interface default and static methods",
+      "source": "original"
+    },
+    {
+      "id": "Q135",
+      "section": "B",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 4,
+      "topic": "abstract classes and interfaces",
+      "source": "original"
+    },
+    {
       "id": "Q036",
       "section": "C",
       "type": "spot-error",
@@ -604,6 +1330,114 @@
       "difficulty": "hard",
       "points": 4,
       "topic": "exception-handling",
+      "source": "original"
+    },
+    {
+      "id": "Q136",
+      "section": "C",
+      "type": "spot-error",
+      "difficulty": "easy",
+      "points": 2,
+      "topic": "throw vs throws",
+      "source": "variant-of-tutorial"
+    },
+    {
+      "id": "Q137",
+      "section": "C",
+      "type": "spot-error",
+      "difficulty": "easy",
+      "points": 1,
+      "topic": "remove(int) vs remove(Object)",
+      "source": "original"
+    },
+    {
+      "id": "Q138",
+      "section": "C",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "generics and size()",
+      "source": "original"
+    },
+    {
+      "id": "Q139",
+      "section": "C",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "contains/equals, loop bounds",
+      "source": "original"
+    },
+    {
+      "id": "Q140",
+      "section": "C",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "custom exception",
+      "source": "original"
+    },
+    {
+      "id": "Q141",
+      "section": "C",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "catch order, loop bounds",
+      "source": "original"
+    },
+    {
+      "id": "Q142",
+      "section": "C",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "ArrayList index, method header",
+      "source": "original"
+    },
+    {
+      "id": "Q143",
+      "section": "C",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 4,
+      "topic": "validation, parseInt, catch type",
+      "source": "original"
+    },
+    {
+      "id": "Q144",
+      "section": "C",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 5,
+      "topic": "calculateCGPA-style method",
+      "source": "variant-of-test"
+    },
+    {
+      "id": "Q145",
+      "section": "C",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 4,
+      "topic": "checked exception, add vs set",
+      "source": "original"
+    },
+    {
+      "id": "Q146",
+      "section": "C",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 5,
+      "topic": "registerCourse-style validation",
+      "source": "variant-of-assignment"
+    },
+    {
+      "id": "Q147",
+      "section": "C",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 4,
+      "topic": "remove(int) vs remove(Object), size()",
       "source": "original"
     },
     {
@@ -724,6 +1558,123 @@
       "source": "variant-of-assignment"
     },
     {
+      "id": "Q148",
+      "section": "D",
+      "type": "spot-error",
+      "difficulty": "easy",
+      "points": 2,
+      "topic": "ActionListener wiring",
+      "source": "original"
+    },
+    {
+      "id": "Q149",
+      "section": "D",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 4,
+      "topic": "validation and output (Register button)",
+      "source": "variant-of-test"
+    },
+    {
+      "id": "Q150",
+      "section": "D",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 4,
+      "topic": "Process Payment button, catch order",
+      "source": "variant-of-test"
+    },
+    {
+      "id": "Q151",
+      "section": "D",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "JComboBox cast, JOptionPane, String.format",
+      "source": "original"
+    },
+    {
+      "id": "Q152",
+      "section": "D",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 4,
+      "topic": "building the window (layout)",
+      "source": "variant-of-test"
+    },
+    {
+      "id": "Q153",
+      "section": "D",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "throw vs throws, overriding",
+      "source": "original"
+    },
+    {
+      "id": "Q154",
+      "section": "D",
+      "type": "spot-error",
+      "difficulty": "medium",
+      "points": 4,
+      "topic": "ArrayList profile display (assignment variant)",
+      "source": "variant-of-assignment"
+    },
+    {
+      "id": "Q155",
+      "section": "D",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 5,
+      "topic": "building the window and listener",
+      "source": "variant-of-test"
+    },
+    {
+      "id": "Q156",
+      "section": "D",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 5,
+      "topic": "exception flow in actionPerformed",
+      "source": "original"
+    },
+    {
+      "id": "Q157",
+      "section": "D",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 4,
+      "topic": "switch fall-through, integer division",
+      "source": "original"
+    },
+    {
+      "id": "Q158",
+      "section": "D",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 5,
+      "topic": "layouts, anonymous listener",
+      "source": "original"
+    },
+    {
+      "id": "Q159",
+      "section": "D",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 5,
+      "topic": "CGPA calculation in a GUI (assignment variant)",
+      "source": "variant-of-assignment"
+    },
+    {
+      "id": "Q160",
+      "section": "D",
+      "type": "spot-error",
+      "difficulty": "hard",
+      "points": 5,
+      "topic": "inner listener class, static main, validation",
+      "source": "original"
+    },
+    {
       "id": "Q061",
       "section": "E",
       "type": "write-code",
@@ -832,6 +1783,114 @@
       "source": "variant-of-test"
     },
     {
+      "id": "Q161",
+      "section": "E",
+      "type": "write-code",
+      "difficulty": "easy",
+      "points": 8,
+      "topic": "arrays min/max",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q162",
+      "section": "E",
+      "type": "write-code",
+      "difficulty": "easy",
+      "points": 8,
+      "topic": "2D arrays",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q163",
+      "section": "E",
+      "type": "write-code",
+      "difficulty": "easy",
+      "points": 8,
+      "topic": "method overloading",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q164",
+      "section": "E",
+      "type": "write-code",
+      "difficulty": "easy",
+      "points": 9,
+      "topic": "linear search",
+      "source": "original"
+    },
+    {
+      "id": "Q165",
+      "section": "E",
+      "type": "write-code",
+      "difficulty": "medium",
+      "points": 10,
+      "topic": "recursion",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q166",
+      "section": "E",
+      "type": "write-code",
+      "difficulty": "medium",
+      "points": 11,
+      "topic": "recursion",
+      "source": "original"
+    },
+    {
+      "id": "Q167",
+      "section": "E",
+      "type": "write-code",
+      "difficulty": "medium",
+      "points": 11,
+      "topic": "bubble sort",
+      "source": "original"
+    },
+    {
+      "id": "Q168",
+      "section": "E",
+      "type": "write-code",
+      "difficulty": "medium",
+      "points": 11,
+      "topic": "2D arrays",
+      "source": "original"
+    },
+    {
+      "id": "Q169",
+      "section": "E",
+      "type": "write-code",
+      "difficulty": "medium",
+      "points": 10,
+      "topic": "insertion sort",
+      "source": "original"
+    },
+    {
+      "id": "Q170",
+      "section": "E",
+      "type": "write-code",
+      "difficulty": "hard",
+      "points": 13,
+      "topic": "binary search",
+      "source": "original"
+    },
+    {
+      "id": "Q171",
+      "section": "E",
+      "type": "write-code",
+      "difficulty": "hard",
+      "points": 14,
+      "topic": "selection sort",
+      "source": "variant-of-test"
+    },
+    {
+      "id": "Q172",
+      "section": "E",
+      "type": "write-code",
+      "difficulty": "hard",
+      "points": 15,
+      "topic": "2D arrays matrix operations",
+      "source": "original"
+    },
+    {
       "id": "Q073",
       "section": "F",
       "type": "write-code",
@@ -904,6 +1963,78 @@
       "source": "variant-of-test"
     },
     {
+      "id": "Q173",
+      "section": "F",
+      "type": "write-code",
+      "difficulty": "easy",
+      "points": 8,
+      "topic": "encapsulation final static",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q174",
+      "section": "F",
+      "type": "write-code",
+      "difficulty": "medium",
+      "points": 10,
+      "topic": "abstract class polymorphism",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q175",
+      "section": "F",
+      "type": "write-code",
+      "difficulty": "medium",
+      "points": 10,
+      "topic": "abstract class",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q176",
+      "section": "F",
+      "type": "write-code",
+      "difficulty": "medium",
+      "points": 10,
+      "topic": "interfaces",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q177",
+      "section": "F",
+      "type": "write-code",
+      "difficulty": "medium",
+      "points": 11,
+      "topic": "multilevel inheritance",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q178",
+      "section": "F",
+      "type": "write-code",
+      "difficulty": "hard",
+      "points": 13,
+      "topic": "abstract class payment",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q179",
+      "section": "F",
+      "type": "write-code",
+      "difficulty": "hard",
+      "points": 13,
+      "topic": "interface default methods",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q180",
+      "section": "F",
+      "type": "write-code",
+      "difficulty": "hard",
+      "points": 15,
+      "topic": "inheritance constructor chaining",
+      "source": "variant-of-assignment"
+    },
+    {
       "id": "Q081",
       "section": "G",
       "type": "write-code",
@@ -947,6 +2078,51 @@
       "points": 14,
       "topic": "gui",
       "source": "variant-of-test"
+    },
+    {
+      "id": "Q181",
+      "section": "G",
+      "type": "write-code",
+      "difficulty": "medium",
+      "points": 9,
+      "topic": "custom exception try-catch-finally",
+      "source": "original"
+    },
+    {
+      "id": "Q182",
+      "section": "G",
+      "type": "write-code",
+      "difficulty": "medium",
+      "points": 10,
+      "topic": "ArrayList remove sort search",
+      "source": "original"
+    },
+    {
+      "id": "Q183",
+      "section": "G",
+      "type": "write-code",
+      "difficulty": "medium",
+      "points": 11,
+      "topic": "Swing form validation",
+      "source": "variant-of-test"
+    },
+    {
+      "id": "Q184",
+      "section": "G",
+      "type": "write-code",
+      "difficulty": "hard",
+      "points": 14,
+      "topic": "Person Student Course CGPA ArrayList",
+      "source": "variant-of-assignment"
+    },
+    {
+      "id": "Q185",
+      "section": "G",
+      "type": "write-code",
+      "difficulty": "hard",
+      "points": 15,
+      "topic": "Swing registration CGPA app",
+      "source": "variant-of-assignment"
     },
     {
       "id": "Q086",
@@ -1039,6 +2215,96 @@
       "source": "variant-of-slides"
     },
     {
+      "id": "Q186",
+      "section": "H",
+      "type": "predict-output",
+      "difficulty": "easy",
+      "points": 3,
+      "topic": "string concatenation and equality",
+      "source": "original"
+    },
+    {
+      "id": "Q187",
+      "section": "H",
+      "type": "predict-output",
+      "difficulty": "easy",
+      "points": 2,
+      "topic": "static counters",
+      "source": "original"
+    },
+    {
+      "id": "Q188",
+      "section": "H",
+      "type": "predict-output",
+      "difficulty": "easy",
+      "points": 2,
+      "topic": "integer division and casting",
+      "source": "original"
+    },
+    {
+      "id": "Q189",
+      "section": "H",
+      "type": "predict-output",
+      "difficulty": "easy",
+      "points": 3,
+      "topic": "constructor chaining",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q190",
+      "section": "H",
+      "type": "predict-output",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "overloading vs overriding",
+      "source": "original"
+    },
+    {
+      "id": "Q191",
+      "section": "H",
+      "type": "predict-output",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "upcasting and dynamic dispatch",
+      "source": "original"
+    },
+    {
+      "id": "Q192",
+      "section": "H",
+      "type": "predict-output",
+      "difficulty": "medium",
+      "points": 3,
+      "topic": "arrays and pass-by-value",
+      "source": "original"
+    },
+    {
+      "id": "Q193",
+      "section": "H",
+      "type": "predict-output",
+      "difficulty": "medium",
+      "points": 4,
+      "topic": "finally ordering and exception flow",
+      "source": "original"
+    },
+    {
+      "id": "Q194",
+      "section": "H",
+      "type": "predict-output",
+      "difficulty": "hard",
+      "points": 4,
+      "topic": "ArrayList remove(int) vs remove(Object)",
+      "source": "original"
+    },
+    {
+      "id": "Q195",
+      "section": "H",
+      "type": "predict-output",
+      "difficulty": "hard",
+      "points": 4,
+      "topic": "initialisation order and uncaught exception",
+      "source": "original"
+    },
+    {
       "id": "Q096",
       "section": "I",
       "type": "debug-extend",
@@ -1082,215 +2348,51 @@
       "points": 15,
       "topic": "custom-exceptions",
       "source": "variant-of-test"
-    }
-  ],
-  "study_order": {
-    "title": "2-Day Calibrated Study Plan",
-    "day1": {
-      "title": "Day 1: Foundations & Core Mechanics (7 hours)",
-      "blocks": [
-        {
-          "block": 1,
-          "time": "08:00 – 10:15 (2h 15m)",
-          "section": "A (Q001 – Q020)",
-          "topic": "Student Records — Constructors, inheritance, getters/setters, arrays, super(), overriding",
-          "focus": "Spotting missing return types, case-sensitive constructor spelling, semicolon omissions, loop bounds."
-        },
-        {
-          "block": 2,
-          "time": "10:30 – 12:15 (1h 45m)",
-          "section": "B (Q021 – Q035)",
-          "topic": "Payment Processing — Abstract classes vs interfaces, visibility reduction, polymorphic references",
-          "focus": "Enforcing abstract method signatures, public interface methods, surcharge/discount logic."
-        },
-        {
-          "block": 3,
-          "time": "13:30 – 16:00 (2h 30m)",
-          "section": "E (Q061 – Q072)",
-          "topic": "Core Practical Programming — Arrays, 2D matrix multiplication, recursion, sorting & searching",
-          "focus": "Writing clean Java classes from scratch without IDE assistance. High priority: Q072 (Selection Sort)."
-        },
-        {
-          "block": 4,
-          "time": "16:30 – 17:30 (1h 00m)",
-          "section": "H Part 1 (Q086 – Q090)",
-          "topic": "Mental Execution & Tracing — Constructor chaining order, static/instance init blocks, string pool, try-catch-finally",
-          "focus": "Stepping through code line-by-line before running the JVM."
-        }
-      ]
-    },
-    "day2": {
-      "title": "Day 2: Advanced OOP, GUI Integration & Timed Mocks (8 hours)",
-      "blocks": [
-        {
-          "block": 5,
-          "time": "08:00 – 09:30 (1h 30m)",
-          "section": "C (Q036 – Q047) & D (Q048 – Q060)",
-          "topic": "University Members, Library & Banking GUI — ArrayList, exceptions, Swing components, ActionListener",
-          "focus": "Diagnosing missing container adds, unparsed numeric fields, misplaced catch blocks."
-        },
-        {
-          "block": 6,
-          "time": "09:45 – 11:30 (1h 45m)",
-          "section": "F (Q073 – Q080) & G (Q081 – Q085)",
-          "topic": "OOP Design & Swing Forms — Multi-level inheritance, abstract class hierarchies, custom exceptions, complete GUI windows",
-          "focus": "Implementing PaymentMethod (Q080) and interactive course registration forms (Q083, Q085)."
-        },
-        {
-          "block": 7,
-          "time": "11:30 – 12:30 (1h 00m)",
-          "section": "I (Q096 – Q100) & H Part 2 (Q091 – Q095)",
-          "topic": "Capstone Debug & Extend & Advanced Output Tracing",
-          "focus": "Two-part questions (error spotting + architectural extension) and tricky JVM corner cases."
-        },
-        {
-          "block": 8,
-          "time": "13:45 – 17:15 (3h 30m)",
-          "section": "Full Mock Exam Simulation",
-          "topic": "Timed exam papers: Mock 1 (70m), Mock 2 (70m), Mock 3 (80m)",
-          "focus": "Simulate exact exam conditions followed by self-grading and feedback review."
-        }
-      ]
-    },
-    "lastHourReview": [
-      "Review case sensitivity in constructor names (e.g. public student(...) fails to compile).",
-      "Review abstract methods terminating with a body { ... } instead of a semicolon ;.",
-      "Review reducing visibility in overridden methods (e.g. protected overriding public).",
-      "Review integer division truncation: (1 / 2) * b * h is 0.0; use 0.5 * b * h.",
-      "Review String equality using == instead of .equals().",
-      "Review off-by-one loop conditions: i <= arr.length triggers ArrayIndexOutOfBoundsException.",
-      "Review container additions for Swing components: frame.add(btn), frame.add(new JScrollPane(textArea))."
-    ],
-    "emergency4Hour": [
-      {
-        "hour": 1,
-        "action": "Solve Mock Paper 1 under strict 60-minute time conditions."
-      },
-      {
-        "hour": 2,
-        "action": "Study Section A (Q001–Q010) and Section B (Q021–Q030) answer keys."
-      },
-      {
-        "hour": 3,
-        "action": "Hand-write code for Q072 (SelectionSort) and Q080 (PaymentMethod Hierarchy)."
-      },
-      {
-        "hour": 4,
-        "action": "Walk through Section H (Q086–Q095) for output tracing corner cases."
-      }
-    ]
-  },
-  "mock_papers": [
-    {
-      "id": 1,
-      "title": "Mock Paper 1: Standard Exam Parity (Leans Medium)",
-      "targetMinutes": 67,
-      "totalPoints": 43,
-      "description": "Replicates standard University of Ibadan COS 202 Java Practical Code Test structure.",
-      "parts": [
-        {
-          "part": 1,
-          "title": "Part 1: Student Records & Inheritance",
-          "questionIds": [
-            "Q001",
-            "Q003",
-            "Q006",
-            "Q011",
-            "Q036"
-          ]
-        },
-        {
-          "part": 2,
-          "title": "Part 2: Payment Processing & Windows",
-          "questionIds": [
-            "Q021",
-            "Q023",
-            "Q038",
-            "Q048"
-          ]
-        },
-        {
-          "part": 3,
-          "title": "Part 3: Writing a Program",
-          "questionIds": [
-            "Q072"
-          ]
-        }
-      ]
     },
     {
-      "id": 2,
-      "title": "Mock Paper 2: Real Exam Parity (Leans Medium-Hard)",
-      "targetMinutes": 68,
-      "totalPoints": 43,
-      "description": "Challenging practical leaning medium-hard with complex payment processing and inheritance.",
-      "parts": [
-        {
-          "part": 1,
-          "title": "Part 1: Student Hierarchies & Library Catalog",
-          "questionIds": [
-            "Q002",
-            "Q007",
-            "Q012",
-            "Q026",
-            "Q041"
-          ]
-        },
-        {
-          "part": 2,
-          "title": "Part 2: Payment Surcharge & Event Handling",
-          "questionIds": [
-            "Q022",
-            "Q027",
-            "Q039",
-            "Q049"
-          ]
-        },
-        {
-          "part": 3,
-          "title": "Part 3: Writing a Program",
-          "questionIds": [
-            "Q080"
-          ]
-        }
-      ]
+      "id": "Q196",
+      "section": "I",
+      "type": "debug-extend",
+      "difficulty": "medium",
+      "points": 9,
+      "topic": "custom exceptions",
+      "source": "original"
     },
     {
-      "id": 3,
-      "title": "Mock Paper 3: High-Difficulty Mastery (Leans Hard)",
-      "targetMinutes": 84,
-      "totalPoints": 50,
-      "description": "Capstone mastery paper featuring advanced OOP, ATM GUI window, and debug & extend scenarios.",
-      "parts": [
-        {
-          "part": 1,
-          "title": "Part 1: Advanced OOP & Exception Handling",
-          "questionIds": [
-            "Q008",
-            "Q013",
-            "Q018",
-            "Q028",
-            "Q042"
-          ]
-        },
-        {
-          "part": 2,
-          "title": "Part 2: Polymorphic Surcharges & ATM GUI Window",
-          "questionIds": [
-            "Q031",
-            "Q032",
-            "Q045",
-            "Q060"
-          ]
-        },
-        {
-          "part": 3,
-          "title": "Part 3: Debug & Extend Capstone",
-          "questionIds": [
-            "Q099"
-          ]
-        }
-      ]
+      "id": "Q197",
+      "section": "I",
+      "type": "debug-extend",
+      "difficulty": "medium",
+      "points": 9,
+      "topic": "ArrayList of objects",
+      "source": "original"
+    },
+    {
+      "id": "Q198",
+      "section": "I",
+      "type": "debug-extend",
+      "difficulty": "hard",
+      "points": 12,
+      "topic": "abstract classes and inheritance",
+      "source": "variant-of-slides"
+    },
+    {
+      "id": "Q199",
+      "section": "I",
+      "type": "debug-extend",
+      "difficulty": "hard",
+      "points": 12,
+      "topic": "CGPA calculation with ArrayList",
+      "source": "variant-of-assignment"
+    },
+    {
+      "id": "Q200",
+      "section": "I",
+      "type": "debug-extend",
+      "difficulty": "hard",
+      "points": 10,
+      "topic": "Swing form and event handling",
+      "source": "variant-of-test"
     }
   ]
 }

@@ -70,7 +70,7 @@ export default function MinimalStudentDashboard() {
   };
 
   // Metrics
-  const totalCount = questions.length || 100;
+  const totalCount = questions.length || 200;
   const completedCount = useMemo(() => {
     return Object.values(records).filter(
       r => r.status === 'graded' || r.status === 'self-checked'
@@ -82,7 +82,7 @@ export default function MinimalStudentDashboard() {
   }, [records]);
 
   const totalPossiblePoints = useMemo(() => {
-    return questions.reduce((sum, q) => sum + q.points, 0) || 500;
+    return questions.reduce((sum, q) => sum + q.points, 0) || 1000;
   }, [questions]);
 
   const completionPercent = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
@@ -183,7 +183,7 @@ export default function MinimalStudentDashboard() {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] gap-3 text-slate-400">
         <Loader2 className="w-8 h-8 animate-spin text-emerald-400" />
-        <span className="text-sm">Loading 100 questions...</span>
+        <span className="text-sm">Loading 200 questions...</span>
       </div>
     );
   }
@@ -242,7 +242,7 @@ export default function MinimalStudentDashboard() {
               <span>COS 202 Java Exam Practice</span>
             </h1>
             <p className="text-xs text-slate-400">
-              100 preset questions across all 9 sections with instant AI error-checking.
+              200 preset questions across all 9 sections with instant AI error-checking.
             </p>
           </div>
 
