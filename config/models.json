@@ -1,0 +1,16 @@
+{
+  "modelPriority": [
+    "openai/gpt-oss-120b",
+    "openai/gpt-oss-20b"
+  ],
+  "defaultLimits": {
+    "rpm": 30,
+    "rpd": 1000,
+    "tpm": 8000,
+    "tpd": 200000
+  },
+  "maxConcurrentRequests": 6,
+  "queueTimeoutMs": 60000,
+  "dailyStudentCap": 30,
+  "gradingPaused": false
+}
